@@ -10,16 +10,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Gyro;
 import frc.robot.subsystems.Mecanum;
 import frc.robot.subsystems.Odometry;
+import edu.wpi.first.wpilibj.Joystick;
 
 public class Localization extends CommandBase {
   private Mecanum mecanum;
   private Gyro gyro;
   private Odometry odometry = new Odometry();
   private Pose2d position = new Pose2d();
+  private Joystick joystick;
   /** Creates a new Localization. */
-  public Localization(Mecanum meca, Gyro imu) {
+  public Localization(Mecanum meca, Gyro imu, Joystick stick) {
     mecanum = meca;
     gyro = imu;
+    joystick = stick;
     addRequirements(meca);
     addRequirements(imu);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,6 +42,11 @@ public class Localization extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double x = joystick.getRawAxis(4);
+    double y = joystick.getRawAxis(5);
+    double rotation = joystick.getRawAxis(0);
+    mecanum.drive(x, y, rotation);
+
     odometry.update(mecanum.getLeftFrontVelocity(), mecanum.getRightFrontVelocity(), mecanum.getLeftBackVelocity(), mecanum.getRightBackVelocity(), gyro.getRotationYaw());
     position = odometry.getPosition();
     SmartDashboard.putNumber("X value", position.getX());
