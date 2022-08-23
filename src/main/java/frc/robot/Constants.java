@@ -36,4 +36,50 @@ public final class Constants {
         public static final Translation2d FRONTRIGHT = new Translation2d(RFCENTER, new Rotation2d(RFORIENT));
         public static final Translation2d BACKRIGHT = new Translation2d(RBCENTER, new Rotation2d(RBORIENT));
     }
+
+    public static final class ROBOT_ID {
+        public static final int LF_ID = 3;
+        public static final int LB_ID = 4;
+        public static final int RF_ID = 1;
+        public static final int RB_ID = 7;
+
+        public static final int SHOOTER_ID = 6;
+        public static final int LOADER_ID = 9;
+        public static final int INTAKE_ID = 11;
+    }
+
+    public static final class CONTROLLER {
+        public static final int A_BUTTON = 1;
+        public static final int B_BUTTON = 2;
+        public static final int LEFT_BUMPER = 5;
+        public static final int RIGHT_BUMPER = 6;
+        public static final int LEFT_Y_AXIS = 1;
+        public static final int RIGHT_Y_AXIS = 5;
+        public static final int RIGHT_X_AXIS = 4;
+        public static final int RIGHT_TRIGGER = 3;
+        public static final int LEFT_TRIGGER = 2;
+        public static final int LEFT_X_AXIS = 0;
+    }
+
+    public static final class SPEED {
+        public static final double LOADER_SPEED = 0.6;
+        public static final double INTAKE_SPEED = 0.6;
+        public static final double SHOOTER_SPEED = 1;
+    }
+
+    public static final class VISION {
+        public static final double MOUNTING_ANGLE = 2*Math.PI;
+        public static final double LIMELIGHT_HEIGHT = 2;
+        public static final double HOOD_HEIGHT = 2.64;
+
+        public static final double KP = 0.8;
+        public static final double KI = 0;
+        public static final double KD = 0;
+
+        public static final double D_KP = 0.8;
+        public static final double D_KI = 0;
+        public static final double D_KD = 0;
+
+        public static final double AIMING_DISTANCE = 2;
+    }
 }

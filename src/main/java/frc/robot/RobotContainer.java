@@ -7,38 +7,81 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.Load;
 import frc.robot.commands.Localization;
+import frc.robot.commands.RotateToAngle;
+import frc.robot.commands.Shoot;
+import frc.robot.commands.Sucker;
 import frc.robot.subsystems.Gyro;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Loader;
 import frc.robot.subsystems.Mecanum;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DriveController;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public final Gyro m_exampleSubsystem = new Gyro();
-  public final Mecanum mecanum = new Mecanum();
-  private Joystick joystick = new Joystick(0);
-  public Command localization = new Localization(mecanum, m_exampleSubsystem, joystick);
+  // private Gyro gyro = new Gyro();
+  private Mecanum mecanum = new Mecanum();
+  private Shooter shooter = new Shooter();
+  private Loader loader = new Loader();
+  private Intake intake = new Intake();
+  private Limelight limelight = new Limelight();
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  public static Joystick joystick = new Joystick(0);
+  // private Command localization = new Localization(mecanum, gyro, joystick);
+  private Command shoot = new Shoot(shooter);
+  private Command load = new Load(loader);
+  private Command suck = new Sucker(intake);
+  private Command driveController = new DriveController(mecanum, joystick);
+  private Command rotateToAngle = new RotateToAngle(mecanum, limelight);
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
   public RobotContainer() {
+    mecanum.init();
+    intake.init();
+    shooter.init();
+    loader.init();
     // Configure the button bindings
     configureButtonBindings();
+    
+    // mecanum.setDefaultCommand(localization);
+    mecanum.setDefaultCommand(driveController);
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
+    new JoystickButton(joystick, Constants.CONTROLLER.A_BUTTON).whileActiveOnce(shoot);
+    // new JoystickButton(joystick,
+    // Constants.CONTROLLER.B_BUTTON).whileActiveOnce(load);
+    new JoystickButton(joystick, Constants.CONTROLLER.LEFT_BUMPER).whileActiveOnce(suck);
+    new JoystickButton(joystick, Constants.CONTROLLER.B_BUTTON).whenInactive(rotateToAngle);
+    // new JoystickButton(joystick, 7).whileActiveOnce(new StartEndCommand(
+    // () -> loader.load(0.6),
+    // () -> loader.load(0),
+    // loader)
+    // );
   }
 
   /**

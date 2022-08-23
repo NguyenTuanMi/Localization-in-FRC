@@ -11,7 +11,6 @@ import frc.robot.subsystems.Gyro;
 import frc.robot.subsystems.Mecanum;
 import frc.robot.subsystems.Odometry;
 import edu.wpi.first.wpilibj.Joystick;
-
 public class Localization extends CommandBase {
   private Mecanum mecanum;
   private Gyro gyro;
@@ -45,18 +44,28 @@ public class Localization extends CommandBase {
     double x = joystick.getRawAxis(4);
     double y = joystick.getRawAxis(5);
     double rotation = joystick.getRawAxis(0);
+    
     mecanum.drive(x, y, rotation);
 
-    odometry.update(mecanum.getLeftFrontVelocity(), mecanum.getRightFrontVelocity(), mecanum.getLeftBackVelocity(), mecanum.getRightBackVelocity(), gyro.getRotationYaw());
+    odometry.update(mecanum.getLeftFrontVelocity(), 
+                    mecanum.getRightFrontVelocity(), 
+                    mecanum.getLeftBackVelocity(), 
+                    mecanum.getRightBackVelocity(), 
+                    gyro.getRotationYaw());
     position = odometry.getPosition();
     SmartDashboard.putNumber("X value", position.getX());
     SmartDashboard.putNumber("Y value", position.getY());
     SmartDashboard.putNumber("Heading value", position.getRotation().getRadians());
+
+    SmartDashboard.putNumber("Joystick x value", x);
+    SmartDashboard.putNumber("Joystick y value", y);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    mecanum.drive(0, 0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
