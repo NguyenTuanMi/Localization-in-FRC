@@ -6,16 +6,17 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Mecanum extends SubsystemBase {
-  private WPI_TalonSRX leftFront = new WPI_TalonSRX(1);
-  private WPI_TalonSRX leftBack = new WPI_TalonSRX(2);
-  private WPI_TalonSRX rightFront = new WPI_TalonSRX(3);
-  private WPI_TalonSRX rightBack = new WPI_TalonSRX(4);
+  private WPI_TalonSRX leftFront = new WPI_TalonSRX(Constants.ROBOT_ID.LF_ID);
+  private WPI_TalonSRX leftBack = new WPI_TalonSRX(Constants.ROBOT_ID.LB_ID);
+  private WPI_TalonSRX rightFront = new WPI_TalonSRX(Constants.ROBOT_ID.RF_ID);
+  private WPI_TalonSRX rightBack = new WPI_TalonSRX(Constants.ROBOT_ID.RB_ID);
   
   private MecanumDrive mecanumDrive = new MecanumDrive(leftFront, leftBack, rightFront, rightBack);
   /** Creates a new MecanumDrive. */

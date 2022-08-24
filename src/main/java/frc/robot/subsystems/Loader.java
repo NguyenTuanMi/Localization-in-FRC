@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
-//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX; 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import static frc.robot.Constants.ROBOT_ID.*;
 

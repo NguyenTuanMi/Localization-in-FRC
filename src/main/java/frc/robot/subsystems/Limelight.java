@@ -47,7 +47,7 @@ public class Limelight extends SubsystemBase {
     SmartDashboard.putNumber("LimelightY", getY());
     SmartDashboard.putNumber("Limelight Area", getArea());
     SmartDashboard.putNumber("Limelight distance", getEstimateDistance());
-    driverMode.setDouble(1);
+    driverMode.setDouble(0);
     // This method will be called once per scheduler run
   }
 }

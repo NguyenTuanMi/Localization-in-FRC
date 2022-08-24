@@ -21,7 +21,7 @@ public class Shoot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shoot.shoot(Constants.SPEED.SHOOTER_SPEED);
+    shoot.shoot(-Constants.SPEED.SHOOTER_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

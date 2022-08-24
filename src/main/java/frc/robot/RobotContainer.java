@@ -8,11 +8,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Load;
-import frc.robot.commands.Localization;
 import frc.robot.commands.RotateToAngle;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.Sucker;
-import frc.robot.subsystems.Gyro;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Loader;
@@ -22,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveController;
+import edu.wpi.first.wpilibj.XboxController;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -42,7 +41,6 @@ public class RobotContainer {
   private Limelight limelight = new Limelight();
 
   public static Joystick joystick = new Joystick(0);
-  // private Command localization = new Localization(mecanum, gyro, joystick);
   private Command shoot = new Shoot(shooter);
   private Command load = new Load(loader);
   private Command suck = new Sucker(intake);
@@ -58,8 +56,6 @@ public class RobotContainer {
     loader.init();
     // Configure the button bindings
     configureButtonBindings();
-    
-    // mecanum.setDefaultCommand(localization);
     mecanum.setDefaultCommand(driveController);
   }
 
@@ -72,11 +68,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(joystick, Constants.CONTROLLER.A_BUTTON).whileActiveOnce(shoot);
-    // new JoystickButton(joystick,
-    // Constants.CONTROLLER.B_BUTTON).whileActiveOnce(load);
+    new JoystickButton(joystick, Constants.CONTROLLER.RIGHT_BUMPER).whileActiveOnce(shoot);
+    new JoystickButton(joystick,
+    Constants.CONTROLLER.B_BUTTON).whileActiveOnce(load);
     new JoystickButton(joystick, Constants.CONTROLLER.LEFT_BUMPER).whileActiveOnce(suck);
-    new JoystickButton(joystick, Constants.CONTROLLER.B_BUTTON).whenInactive(rotateToAngle);
+    new JoystickButton(joystick, Constants.CONTROLLER.A_BUTTON).whenInactive(rotateToAngle);
     // new JoystickButton(joystick, 7).whileActiveOnce(new StartEndCommand(
     // () -> loader.load(0.6),
     // () -> loader.load(0),

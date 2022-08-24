@@ -63,12 +63,12 @@ public final class Constants {
 
     public static final class SPEED {
         public static final double LOADER_SPEED = 0.6;
-        public static final double INTAKE_SPEED = 0.6;
+        public static final double INTAKE_SPEED = 0.4;
         public static final double SHOOTER_SPEED = 1;
     }
 
     public static final class VISION {
-        public static final double MOUNTING_ANGLE = 2*Math.PI;
+        public static final double MOUNTING_ANGLE = 30;
         public static final double LIMELIGHT_HEIGHT = 2;
         public static final double HOOD_HEIGHT = 2.64;
 
@@ -80,6 +80,6 @@ public final class Constants {
         public static final double D_KI = 0;
         public static final double D_KD = 0;
 
-        public static final double AIMING_DISTANCE = 2;
+        public static final double AIMING_DISTANCE = 2.5;
     }
 }

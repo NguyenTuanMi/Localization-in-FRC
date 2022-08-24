@@ -27,9 +27,9 @@ public class DriveController extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double x = joystick.getRawAxis(Constants.CONTROLLER.LEFT_X_AXIS);
-    double y = joystick.getRawAxis(Constants.CONTROLLER.LEFT_Y_AXIS);
-    double rotation = joystick.getRawAxis(Constants.CONTROLLER.RIGHT_X_AXIS);
+    double x = joystick.getRawAxis(Constants.CONTROLLER.LEFT_X_AXIS)*0.6;
+    double y = joystick.getRawAxis(Constants.CONTROLLER.LEFT_Y_AXIS)*0.6;
+    double rotation = -joystick.getRawAxis(Constants.CONTROLLER.RIGHT_X_AXIS)*0.6;
 
     mecanum.drive(x, y, rotation);
   }

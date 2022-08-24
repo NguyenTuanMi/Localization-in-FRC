@@ -6,7 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
+//import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
 
 public class Sucker extends CommandBase {
@@ -23,15 +23,15 @@ public class Sucker extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    sucker.suck(Constants.SPEED.INTAKE_SPEED);
+    sucker.suck(-Constants.SPEED.INTAKE_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.joystick.getTrigger() == true){
-      sucker.suck(1);
-    }
+    // if(RobotContainer.joystick.getTrigger() == true){
+    //   sucker.suck(Constants.SPEED.INTAKE_SPEED);
+    // }
   }
 
   // Called once the command ends or is interrupted.
