@@ -16,14 +16,21 @@ public class Odometry {
     public Odometry() {
     }
 
-    public void update(double frontLeft, double frontRight, double backLeft, double backRight, Rotation2d yaw) {
-        gyroAngle = yaw;
-        position = odometry.update(gyroAngle, new MecanumDriveWheelSpeeds(frontLeft, frontRight, backLeft, backRight));
-    }
-
     public void init(Rotation2d yaw) {
         gyroAngle = yaw;
-        odometry = new MecanumDriveOdometry(kinematics, gyroAngle, new Pose2d(INIT_X, INIT_Y, new Rotation2d(INIT_THETA)));
+        odometry = new MecanumDriveOdometry(
+            kinematics, 
+            gyroAngle, 
+            new Pose2d(INIT_X, INIT_Y, new Rotation2d(INIT_THETA))
+            );
+    }
+
+    public void update(double frontLeft, double frontRight, double backLeft, double backRight, Rotation2d yaw) {
+        gyroAngle = yaw;
+        position = odometry.update(
+            gyroAngle, 
+            new MecanumDriveWheelSpeeds(frontLeft, frontRight, backLeft, backRight)
+            );
     }
 
     public Pose2d getPosition() {

@@ -16,6 +16,7 @@ public class Limelight extends SubsystemBase {
   private NetworkTableEntry tx = table.getEntry("tx");
   private NetworkTableEntry ty = table.getEntry("ty");
   private NetworkTableEntry area = table.getEntry("ta");
+  private NetworkTableEntry tv = table.getEntry("tv");
   private NetworkTableEntry driverMode = table.getEntry("camMode");
 
   /** Creates a new Limelight. */
@@ -39,6 +40,10 @@ public class Limelight extends SubsystemBase {
     angle = angle*Math.PI/180; // Convert degrees to radians 
     double dH = HOOD_HEIGHT - LIMELIGHT_HEIGHT;
     return dH/Math.atan(angle);
+  }
+
+  public boolean seeTarget() {
+      return tv.getDouble(0) == 1;
   }
 
   @Override

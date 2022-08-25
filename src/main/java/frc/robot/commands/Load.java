@@ -4,37 +4,41 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Loader;
 
 public class Load extends CommandBase {
   private Loader loader;
-  /** Creates a new Loader. */
-  public Load(Loader load) {
-    loader = load;
+  private XboxController xboxController;
+  
+  public Load(Loader load, XboxController xbox) {
     load.init();
+    xboxController = xbox;
+    loader = load;
     addRequirements(load);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    loader.load(-Constants.SPEED.LOADER_SPEED);
+    // if (xboxController.getLeftTriggerAxis() != 0) {
+    //   loader.load(-Constants.SPEED.LOADER_SPEED);
+    // }
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if (xboxController.getLeftTriggerAxis() != 0) {
+      loader.load(Constants.SPEED.LOADER_SPEED);
+    }
+  }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     loader.load(0);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

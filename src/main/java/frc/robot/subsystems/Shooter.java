@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
 
   public void init() {
     shooter.setNeutralMode(NeutralMode.Brake);
-    shooter.setInverted(false);
+    shooter.setInverted(true);
   }
 
   public void shoot(double speed) {

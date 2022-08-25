@@ -14,8 +14,8 @@ public class Sucker extends CommandBase {
   private Intake sucker;
 
   public Sucker(Intake intake) {
-    sucker = intake;
     intake.init();
+    sucker = intake;
     addRequirements(intake);
     // Use addRequirements() here to declare subsystem dependencies.
   }

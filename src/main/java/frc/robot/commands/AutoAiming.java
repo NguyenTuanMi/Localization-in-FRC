@@ -11,19 +11,20 @@ import frc.robot.subsystems.Mecanum;
 
 import static frc.robot.Constants.VISION.*;
 
-public class RotateToAngle extends CommandBase {
+public class AutoAiming extends CommandBase {
   private Mecanum mecanum;
   private Limelight limelight;
   private PIDController controller;
   private PIDController dController;
 
-  public RotateToAngle(Mecanum meca, Limelight cam) {
+  public AutoAiming(Mecanum meca, Limelight cam) {
+    meca.init();
     mecanum = meca;
     limelight = cam;
     controller = new PIDController(KP, KI, KD);
     dController = new PIDController(D_KP, D_KI, D_KD);
 
-    controller.setIntegratorRange(-27/360, 27/360);
+    controller.setIntegratorRange(-27/54, 27/54);
     controller.setTolerance(0.02);
 
     dController.setIntegratorRange(0, 1);

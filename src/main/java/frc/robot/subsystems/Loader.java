@@ -13,18 +13,14 @@ import static frc.robot.Constants.ROBOT_ID.*;
 
 public class Loader extends SubsystemBase {
   /** Creates a new Loader. */
-  //private WPI_TalonSRX loader;
   private VictorSPX loader;
   public Loader() {
-    //loader = new WPI_TalonSRX(LOADER_ID);
     loader = new VictorSPX(LOADER_ID);
   }
 
   public void init() {
-    // loader.setNeutralMode(NeutralMode.Brake);
-    // loader.setInverted(false);
     loader.setNeutralMode(NeutralMode.Brake);
-    loader.setInverted(false);
+    loader.setInverted(true);
   }
 
   public void load(double speed) {

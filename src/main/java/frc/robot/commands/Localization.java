@@ -17,17 +17,15 @@ public class Localization extends CommandBase {
   private Odometry odometry = new Odometry();
   private Pose2d position = new Pose2d();
   private Joystick joystick;
-  /** Creates a new Localization. */
+  
   public Localization(Mecanum meca, Gyro imu, Joystick stick) {
     mecanum = meca;
     gyro = imu;
     joystick = stick;
     addRequirements(meca);
     addRequirements(imu);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     mecanum.init();
@@ -38,7 +36,6 @@ public class Localization extends CommandBase {
     odometry.init(gyro.getRotationYaw());
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double x = joystick.getRawAxis(4);
@@ -61,13 +58,11 @@ public class Localization extends CommandBase {
     SmartDashboard.putNumber("Joystick y value", y);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     mecanum.drive(0, 0, 0);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
