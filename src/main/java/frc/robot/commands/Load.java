@@ -32,6 +32,9 @@ public class Load extends CommandBase {
     if (xboxController.getLeftTriggerAxis() != 0) {
       loader.load(Constants.SPEED.LOADER_SPEED);
     }
+    else {
+      loader.load(0);
+    }
   }
 
   @Override

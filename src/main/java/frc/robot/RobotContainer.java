@@ -4,23 +4,22 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Load;
 import frc.robot.commands.AutoAiming;
 import frc.robot.commands.Searching;
-// import frc.robot.commands.Shoot;
-// import frc.robot.commands.Sucker;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Loader;
 import frc.robot.subsystems.Mecanum;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveController;
+
 import static frc.robot.Constants.CONTROLLER.*;
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -37,20 +36,19 @@ public class RobotContainer {
   private Loader loader = new Loader();
   private Intake intake = new Intake();
   private Limelight limelight = new Limelight();
+  
 
   private XboxController controller = new XboxController(0);
-  // private Command shoot = new Shoot(shooter);
   private Command load = new Load(loader, controller);
-  // private Command suck = new Sucker(intake);
   private Command driveController = new DriveController(mecanum, controller);
-  private Command rotateToAngle = new AutoAiming(mecanum, limelight);
+  private Command autoAiming = new AutoAiming(mecanum, limelight);
   private Command seeking = new Searching(mecanum);
   
   public RobotContainer() {
-    // mecanum.init();
+    mecanum.init();
     intake.init();
     shooter.init();
-    // loader.init();
+    loader.init();
 
     configureButtonBindings();
     mecanum.setDefaultCommand(driveController);
@@ -66,12 +64,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // new JoystickButton(controller, Constants.CONTROLLER.RIGHT_BUMPER).whileActiveOnce(shoot);
-    // new JoystickButton(controller, Constants.CONTROLLER.B_BUTTON).whileActiveOnce(load);
-    // new JoystickButton(controller, Constants.CONTROLLER.LEFT_BUMPER).whileActiveOnce(suck);
-    // new JoystickButton(controller, Constants.CONTROLLER.A_BUTTON).whileActiveOnce(rotateToAngle);
-    
-    new JoystickButton(controller, A_BUTTON).whileActiveOnce(new ConditionalCommand(rotateToAngle, seeking, limelight::seeTarget));
+    new JoystickButton(controller, A_BUTTON).whileActiveContinuous(new ConditionalCommand(autoAiming, seeking, limelight::seeTarget));
     new JoystickButton(controller, RIGHT_BUMPER).whileActiveOnce(new StartEndCommand(
     () -> shooter.shoot(1),
     () -> shooter.shoot(0),
@@ -90,7 +83,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
     return null;
   }
 }

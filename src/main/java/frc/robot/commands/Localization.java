@@ -28,11 +28,8 @@ public class Localization extends CommandBase {
 
   @Override
   public void initialize() {
-    mecanum.init();
-    gyro.init();
-    while(gyro.isCalibrating()) {
-      SmartDashboard.putBoolean("Calibration", true);
-    }
+    // mecanum.init();
+    // gyro.init();
     odometry.init(gyro.getRotationYaw());
   }
 

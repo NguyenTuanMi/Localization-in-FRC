@@ -9,21 +9,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Gyro extends SubsystemBase {
-  private AHRS ahrs;
+  private AHRS ahrs = new AHRS();
   /** Creates a new ExampleSubsystem. */
   public Gyro() {
   }
 
   public void init() {
-    ahrs = new AHRS();
-  }
-
-  public void calibrate() {
-    ahrs.calibrate();
-  }
-
-  public boolean isCalibrating() {
-    return ahrs.isCalibrating();
+    ahrs.zeroYaw();
   }
 
   public float getYaw() {

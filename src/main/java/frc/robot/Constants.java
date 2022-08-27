@@ -57,7 +57,6 @@ public final class Constants {
         public static final int RIGHT_BUMPER = 6;
         public static final int BACK_BUTTON = 7;
         public static final int START_BUTTON = 8;
-
     }
 
     public static final class SPEED {
@@ -69,9 +68,9 @@ public final class Constants {
     public static final class VISION {
         public static final double MOUNTING_ANGLE = 30;
         public static final double LIMELIGHT_HEIGHT = 2;
-        public static final double HOOD_HEIGHT = 2.64;
+        public static final double HUB_HEIGHT = 2.64;
 
-        public static final double KP = 0.8;
+        public static final double KP = 1;
         public static final double KI = 0;
         public static final double KD = 0;
 

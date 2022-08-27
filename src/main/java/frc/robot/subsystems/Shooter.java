@@ -11,11 +11,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import static frc.robot.Constants.ROBOT_ID.*;
 
 public class Shooter extends SubsystemBase {
-  /** Creates a new Shooter. */
-  private WPI_TalonSRX shooter;
+  private WPI_TalonSRX shooter = new WPI_TalonSRX(SHOOTER_ID);
 
   public Shooter() {
-    shooter = new WPI_TalonSRX(SHOOTER_ID);
   }
 
   public void init() {
@@ -29,6 +27,6 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    
   }
 }

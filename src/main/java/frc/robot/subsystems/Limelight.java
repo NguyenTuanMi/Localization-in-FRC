@@ -5,11 +5,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.Constants.VISION.*;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import static frc.robot.Constants.VISION.*;
 
 public class Limelight extends SubsystemBase {
   private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -18,8 +18,7 @@ public class Limelight extends SubsystemBase {
   private NetworkTableEntry area = table.getEntry("ta");
   private NetworkTableEntry tv = table.getEntry("tv");
   private NetworkTableEntry driverMode = table.getEntry("camMode");
-
-  /** Creates a new Limelight. */
+  
   public Limelight() {
   }
 
@@ -38,7 +37,7 @@ public class Limelight extends SubsystemBase {
   public double getEstimateDistance() {
     double angle = getY() + MOUNTING_ANGLE; // Calculate angle
     angle = angle*Math.PI/180; // Convert degrees to radians 
-    double dH = HOOD_HEIGHT - LIMELIGHT_HEIGHT;
+    double dH = HUB_HEIGHT - LIMELIGHT_HEIGHT;
     return dH/Math.atan(angle);
   }
 
@@ -52,7 +51,7 @@ public class Limelight extends SubsystemBase {
     SmartDashboard.putNumber("LimelightY", getY());
     SmartDashboard.putNumber("Limelight Area", getArea());
     SmartDashboard.putNumber("Limelight distance", getEstimateDistance());
+    SmartDashboard.putBoolean("Limelight see target", seeTarget());
     driverMode.setDouble(0);
-    // This method will be called once per scheduler run
   }
 }

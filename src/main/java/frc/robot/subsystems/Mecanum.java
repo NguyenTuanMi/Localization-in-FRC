@@ -6,28 +6,27 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import static frc.robot.Constants.ROBOT_ID.*;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Mecanum extends SubsystemBase {
-  private WPI_TalonSRX leftFront = new WPI_TalonSRX(Constants.ROBOT_ID.LF_ID);
-  private WPI_TalonSRX leftBack = new WPI_TalonSRX(Constants.ROBOT_ID.LB_ID);
-  private WPI_TalonSRX rightFront = new WPI_TalonSRX(Constants.ROBOT_ID.RF_ID);
-  private WPI_TalonSRX rightBack = new WPI_TalonSRX(Constants.ROBOT_ID.RB_ID);
+  private WPI_TalonSRX leftFront = new WPI_TalonSRX(LF_ID);
+  private WPI_TalonSRX leftBack = new WPI_TalonSRX(LB_ID);
+  private WPI_TalonSRX rightFront = new WPI_TalonSRX(RF_ID);
+  private WPI_TalonSRX rightBack = new WPI_TalonSRX(RB_ID);
   
   private MecanumDrive mecanumDrive = new MecanumDrive(leftFront, leftBack, rightFront, rightBack);
-  /** Creates a new MecanumDrive. */
   public Mecanum() {
   }
 
   public void init() {
-    leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
-    leftBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
-    rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
-    rightBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+    leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    leftBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    rightBack.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
     leftFront.setNeutralMode(NeutralMode.Brake);
     leftBack.setNeutralMode(NeutralMode.Brake);
@@ -60,6 +59,6 @@ public class Mecanum extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    
   }
 }

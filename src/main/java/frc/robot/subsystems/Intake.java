@@ -11,15 +11,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import static frc.robot.Constants.ROBOT_ID.*;
 
 public class Intake extends SubsystemBase {
-  private WPI_TalonSRX intake;
-  /** Creates a new Intake. */
+  private WPI_TalonSRX intake = new WPI_TalonSRX(INTAKE_ID);
   public Intake() {
-    intake = new WPI_TalonSRX(INTAKE_ID);
   }
 
   public void init() {
     intake.setNeutralMode(NeutralMode.Brake);
-    intake.setInverted(false);
+    intake.setInverted(true);
   }
 
   public void suck(double suck) {

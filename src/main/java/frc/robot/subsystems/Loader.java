@@ -12,10 +12,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import static frc.robot.Constants.ROBOT_ID.*;
 
 public class Loader extends SubsystemBase {
-  /** Creates a new Loader. */
-  private VictorSPX loader;
+  private VictorSPX loader = new VictorSPX(LOADER_ID);
   public Loader() {
-    loader = new VictorSPX(LOADER_ID);
   }
 
   public void init() {
